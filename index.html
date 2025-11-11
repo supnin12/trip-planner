@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Travel Itinerary Planner</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #89f7fe, #66a6ff);
+    color: #333;
+    text-align: center;
+    padding: 40px;
+  }
+  h1 {
+    color: #fff;
+  }
+  select, input, button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+  }
+  button {
+    background: #0078ff;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #005ecb;
+  }
+  #itinerary {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 700px;
+    margin: 20px auto;
+    text-align: left;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+</style>
+</head>
+<body>
+
+<h1>🌍 Smart Travel Itinerary Planner</h1>
+<p>Select a destination and number of days (1–5)</p>
+
+<select id="destination">
+  <option value="">-- Choose a Destination --</option>
+  <option>Thailand</option>
+  <option>Dubai</option>
+  <option>South Korea</option>
+  <option>China</option>
+  <option>India</option>
+  <option>Japan</option>
+  <option>Bali</option>
+</select>
+
+<input type="number" id="days" placeholder="Days (1–5)" min="1" max="5">
+<button onclick="generateItinerary()">Generate Itinerary</button>
+
+<div id="itinerary"></div>
+
+<script>
+const itineraries = {
+  "Thailand": [
+    "Bangkok city tour – Grand Palace, Wat Arun, and Chao Phraya River Cruise.",
+    "Day trip to Ayutthaya, visit ancient temples and floating market.",
+    "Fly to Chiang Mai, explore Doi Suthep temple and night bazaar.",
+    "Elephant Nature Park visit and traditional Thai cooking class.",
+    "Relax in Phuket – beach time and sunset dinner cruise."
+  ],
+  "Dubai": [
+    "City tour – Burj Khalifa, Dubai Mall, and Dubai Fountain show.",
+    "Desert safari with BBQ dinner and camel ride.",
+    "Day trip to Abu Dhabi – Sheikh Zayed Grand Mosque.",
+    "Visit Global Village and Miracle Garden.",
+    "Relax at Jumeirah Beach and Dhow Cruise at Marina."
+  ],
+  "South Korea": [
+    "Seoul city tour – Gyeongbokgung Palace and Bukchon Hanok Village.",
+    "Shopping at Myeongdong and visit N Seoul Tower.",
+    "Day trip to Nami Island and Petite France.",
+    "Travel to Busan – Haeundae Beach and Gamcheon Culture Village.",
+    "Relax and enjoy Korean BBQ and street food markets."
+  ],
+  "China": [
+    "Beijing – Great Wall, Tiananmen Square, and Forbidden City.",
+    "Temple of Heaven and Summer Palace visit.",
+    "Travel to Xi’an – Terracotta Warriors.",
+    "Shanghai city tour – The Bund and Yu Garden.",
+    "Free day for shopping and local cuisine exploration."
+  ],
+  "India": [
+    "Delhi sightseeing – Red Fort, Qutub Minar, India Gate.",
+    "Agra – Taj Mahal and Agra Fort.",
+    "Jaipur – Amber Fort, City Palace, and Hawa Mahal.",
+    "Udaipur – Lake Pichola and City Palace.",
+    "Relax and enjoy traditional Indian cuisine."
+  ],
+  "Japan": [
+    "Tokyo city tour – Senso-ji Temple, Shibuya Crossing, and Tokyo Skytree.",
+    "Day trip to Mt. Fuji and Lake Kawaguchi.",
+    "Kyoto – Fushimi Inari Shrine, Kinkaku-ji (Golden Pavilion).",
+    "Osaka – Osaka Castle and Dotonbori street food tour.",
+    "Nara – visit Todaiji Temple and feed the friendly deer."
+  ],
+  "Bali": [
+    "Ubud rice terraces and Monkey Forest.",
+    "Tegallalang swing and coffee plantations.",
+    "Beach day at Nusa Dua or Seminyak.",
+    "Temple visits – Tanah Lot and Uluwatu sunset.",
+    "Relaxation, spa, and Balinese dinner night."
+  ]
+};
+
+function generateItinerary() {
+  const destination = document.getElementById("destination").value;
+  const days = parseInt(document.getElementById("days").value);
+  const container = document.getElementById("itinerary");
+  container.innerHTML = "";
+
+  if (!destination || !days || days < 1 || days > 5) {
+    container.innerHTML = "<p style='color:red;'>⚠️ Please select a valid destination and number of days (1–5).</p>";
+    return;
+  }
+
+  let html = `<h2>${destination} - ${days}-Day Itinerary</h2><ol>`;
+  for (let i = 0; i < days; i++) {
+    html += `<li>${itineraries[destination][i]}</li>`;
+  }
+  html += "</ol>";
+  container.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
